@@ -1,0 +1,57 @@
+Optimized_Queue_Model is a simulation program based on MASON. the goal of 
+this program is to find the queue which has optimized balanced waiting time 
+between appointed patients and general patients.
+
+Optimized_Queue_Model was written by Bao Tianyou, and Hu Hanxing. 
+
+--------------------------------------------------------------------------
+
+
+The file structure as following:
+
+├─lib
+| └─mason.19.jar
+|
+├─src
+| ├─Doctor.java	
+| ├─MyQueueType.java
+| ├─MyQueues.java
+| ├─MyQueuesWithUI.java
+| ├─Patient.java
+| ├─PatientArriveList.java
+| ├─QueueType1.java
+| ├─QueueType2.java
+| ├─QueueType3.java
+| └─QueueType4.java
+|
+├─LICENSE
+├─README
+
+
+lib.  we use mason.19 as library. you have to install it first.
+
+src.  it is our main code.
+
+LICENSE.  the Academic Free License version 3.0 is used.
+
+--------------------------------------------------------------------------
+
+
+how to use
+
+1.install mason.
+2.run MyQueuesWithUI.java or MyQueues.java.
+3.collect data from console.
+
+
+the simulation start at MyQueuesWithUI.java, if you want to run program with GUI.
+First, MyQueuesWithUI.java calls MyQueues.java. in MyQueues.java, PatientArriveList 
+thread and several Doctor threads are put in schedule, after generating all 
+patients' arrive times. Then, the simulation start to run step by step. in every 
+step, PatientArriveList thread and all several Doctor threads will do their thing 
+once. PatientArriveList thread will check the current time and put patient in 
+4 different queues in correct time. Doctor thread will keep call patient from 
+4 queues and will hang on depended on patient's required time. meanwhile, some 
+counter will keep record the queue information. when the simulation end, the 
+result will print on console.
+
