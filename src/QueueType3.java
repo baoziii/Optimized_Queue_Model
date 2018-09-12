@@ -8,22 +8,29 @@ public class QueueType3 implements MyQueueType {
 	appointment time distributed evenly(length of appointment = time / total appointment patient number)
 	*/
 
-    // Actual Queue
-    ArrayList<Patient> currentQueue;
+    // Appointment patient queue
+    ArrayList<Patient> appQueue;
+    // General patient queue
+    ArrayList<Patient> comQueue;
 
-    int currentQueueCount = -1;
+    int appQueueCount=-1;
+    int comQueueCount=-1;
+
+    int currentQueueCount=-1;
 
     int maxCount = 0;
 
-    QueueType3() {
-        currentQueue = new ArrayList<Patient>();
+    QueueType3()
+    {
+        appQueue = new ArrayList<Patient>();
+        comQueue = new ArrayList<Patient>();
     }
 
     @Override
     // add to general queue
     public synchronized void addComReg(Patient patient) {
-        currentQueue.add(patient);
-        currentQueueCount++;
+        comQueue.add(patient);
+        comQueueCount++;
     }
 
     // add to appointment queue
@@ -32,12 +39,12 @@ public class QueueType3 implements MyQueueType {
         // is late?
         if (patient.scheduleAt >= patient.arrivalAt) // on time
         {
-            currentQueue.add(0, patient); // insert to the header
-            currentQueueCount++;
+            appQueue.add(patient); // insert to the bottom of appointment queue
+            appQueueCount++;
         } else // late
         {
-            currentQueue.add(patient);// insert to the bottom
-            currentQueueCount++;
+            comQueue.add(patient);// insert to the bottom
+            comQueueCount++;
         }
     }
 
@@ -52,11 +59,17 @@ public class QueueType3 implements MyQueueType {
         }
 
         Patient tmp = null;// If the queue is empty, return null
-        if (currentQueueCount >= 0)// If the Appointment queue is empty, genral patient can be served
+        if (appQueueCount < 0) // If the Appointment queue is empty, genral patient can be served
         {
-            tmp = currentQueue.get(0);
-            currentQueue.remove(0);
-            currentQueueCount--;
+            if (comQueueCount >= 0) {
+                tmp = comQueue.get(0);
+                comQueue.remove(0);
+                comQueueCount--;
+            }
+        } else {
+            tmp = appQueue.get(0);
+            appQueue.remove(0);
+            appQueueCount--;
         }
         return tmp;
     }

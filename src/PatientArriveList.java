@@ -37,11 +37,13 @@ public class PatientArriveList implements Steppable {
                     myQueues.queueType2.addAppReg(patient);
                     myQueues.queueType3.addAppReg(patient);
                     myQueues.queueType4.addAppReg(patient);
+                    myQueues.queueType5.addAppReg(patient);
                 } else {
                     myQueues.queueType1.addComReg(patient);
                     myQueues.queueType2.addComReg(patient);
                     myQueues.queueType3.addComReg(patient);
                     myQueues.queueType4.addComReg(patient);
+                    myQueues.queueType5.addComReg(patient);
                 }
 
                 if (currentPatientCount < inputList.length - 1) {

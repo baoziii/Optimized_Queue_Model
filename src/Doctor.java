@@ -9,6 +9,7 @@ public class Doctor implements Steppable {
     int onWorkCount2 = 0;
     int onWorkCount3 = 0;
     int onWorkCount4 = 0;
+    int onWorkCount5 = 0;
     int testCount = 0;
 
     public Doctor() {
@@ -65,7 +66,18 @@ public class Doctor implements Steppable {
             onWorkCount4--;
         }
 
-        if (myQueues.schedule.getTime() < (myQueues.time * 100) || myQueues.queueType1.size() != 0 || myQueues.queueType2.size() != 0 || myQueues.queueType3.size() != 0 || myQueues.queueType4.size() != 0) {
+        if (onWorkCount5 == 0) {
+            Patient tmp5 = myQueues.queueType5.leaveQueue();
+            if (tmp5 != null) {
+                myQueues.resetResultArr5(tmp5.pid, 2, (myQueues.schedule.getTime() / 100));
+                onWorkCount5 = tmp5.takeTime;
+            }
+
+        } else {
+            onWorkCount5--;
+        }
+
+        if (myQueues.schedule.getTime() < (myQueues.time * 100) || myQueues.queueType1.size() != 0 || myQueues.queueType2.size() != 0 || myQueues.queueType3.size() != 0 || myQueues.queueType4.size() != 0 || myQueues.queueType5.size() != 0) {
             myQueues.schedule.scheduleOnce(this);
             testCount++;
         } else {
@@ -74,7 +86,7 @@ public class Doctor implements Steppable {
     }
 
     public String toString() {
-        return "[" + System.identityHashCode(this) + "] onWorkCount1: " + onWorkCount1 + " onWorkCount2: " + onWorkCount2 + " onWorkCount3: " + onWorkCount3 + " onWorkCount4: " + onWorkCount4;
+        return "[" + System.identityHashCode(this) + "] onWorkCount1: " + onWorkCount1 + " onWorkCount2: " + onWorkCount2 + " onWorkCount3: " + onWorkCount3 + " onWorkCount4: " + onWorkCount4 + " onWorkCount5: " + onWorkCount5;
     }
 
 }
