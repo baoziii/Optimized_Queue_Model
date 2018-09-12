@@ -22,10 +22,11 @@ The file structure as following:
 | ├─QueueType1.java
 | ├─QueueType2.java
 | ├─QueueType3.java
-| └─QueueType4.java
+| ├─QueueType4.java
+| └─QueueType5.java
 |
 ├─LICENSE
-├─README
+└─README
 
 
 lib.  we use mason.19 as library. you have to install it first.
@@ -50,8 +51,8 @@ thread and several Doctor threads are put in schedule, after generating all
 patients' arrive times. Then, the simulation start to run step by step. in every 
 step, PatientArriveList thread and all several Doctor threads will do their thing 
 once. PatientArriveList thread will check the current time and put patient in 
-4 different queues in correct time. Doctor thread will keep call patient from 
-4 queues and will hang on depended on patient's required time. meanwhile, some 
+5 different queues in correct time. Doctor thread will keep call patient from 
+5 queues and will hang on depended on patient's required time. meanwhile, some 
 counter will keep record the queue information. when the simulation end, the 
 result will print on console.
 
